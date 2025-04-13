@@ -1,14 +1,45 @@
 <!-- Debug Info (temporary) -->
 <div style="background:#f8f9fa; padding:10px; margin-bottom:15px; border:1px solid #dee2e6;">
-  Host variable from template: <%= host %><br>
-  Port variable from template: <%= port %><br>
+  Host variable: <%= host %><br>
+  Port variable: <%= port %><br>
   Expected URL: /node/<%= host %>/<%= port %>/lab
 </div>
 
-<form action="/node/<%= host %>/<%= port %>/login" method="post" target="_blank">
+<!-- Primary button for direct access -->
+<button id="directAccessBtn" class="btn btn-primary">
+  <i class="fa fa-registered"></i> Connect to Introduction to Shell app
+</button>
+
+<!-- Hidden backup form for authentication -->
+<form id="authForm" action="/node/<%= host %>/<%= port %>/login" method="post" style="display:none;">
   <input type="hidden" name="password" value="<%= password %>">
   <input type="hidden" name="next" value="/node/<%= host %>/<%= port %>/lab">
-  <button class="btn btn-primary" type="submit">
-    <i class="fa fa-registered"></i> Connect to Introduction to Shell app
-  </button>
+  <button type="submit">Authenticate</button>
 </form>
+
+<script>
+  document.getElementById('directAccessBtn').addEventListener('click', function() {
+    // Store the correct variables
+    var correctHost = '<%= host %>';
+    var correctPort = '<%= port %>';
+    
+    // Try direct access first
+    var labWindow = window.open('/node/' + correctHost + '/' + correctPort + '/lab', '_blank');
+    
+    // Submit the auth form in a hidden iframe
+    var iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+    
+    setTimeout(function() {
+      var form = document.getElementById('authForm');
+      iframe.contentDocument.body.appendChild(form.cloneNode(true));
+      iframe.contentDocument.forms[0].submit();
+      
+      // Cleanup after a delay
+      setTimeout(function() {
+        document.body.removeChild(iframe);
+      }, 5000);
+    }, 500);
+  });
+</script>
