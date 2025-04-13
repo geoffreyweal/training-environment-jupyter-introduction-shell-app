@@ -1,3 +1,15 @@
-<a href="/node/<%= host %>/<%= port %>/lab?token=<%= password %>" target="_blank" class="btn btn-primary">
+<button class="btn btn-primary" onclick="redirectToJupyter()">
   <i class="fa fa-registered"></i> Connect to Introduction to Shell app
-</a>
+</button>
+
+<script>
+  function redirectToJupyter() {
+    // Get the components from the template
+    var host = '<%= host %>'; // This should have the correct IP address
+    var port = '<%= port %>';
+    var token = '<%= password %>';
+    
+    // Open with the host variable, which should be the IP
+    window.open('/node/' + host + '/' + port + '/lab?token=' + token, '_blank');
+  }
+</script>
