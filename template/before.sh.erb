@@ -6,8 +6,10 @@ exec &> >(tee -a "session.log")
 
 # setup host and port
 source /bin/find_host_port
+echo "From find_host_port - HOST_CFG: $HOST_CFG, PORT_CFG: $PORT_CFG"
 export host="$HOST_CFG"
 export port="$PORT_CFG"
+echo "Exported variables - host: $host, port: $port"
 
 # setup password
 source /bin/save_passwd_as_secret
