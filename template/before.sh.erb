@@ -14,8 +14,10 @@ source /bin/save_passwd_as_secret
 export password="$PASSWORD"
 source /bin/create_salt_and_sha1
 
+
+
 # write config file for JupyterLab
-export CONFIG_FILE=/ood/ondemand_config.py
+export CONFIG_FILE=${HOME}/ondemand_config.py
 cat << EOF > "${CONFIG_FILE}"
 c.FileContentsManager.delete_to_trash = False
 c.LabApp.check_for_updates_class = 'jupyterlab.NeverCheckForUpdate'
@@ -23,7 +25,7 @@ c.LabApp.extension_manager = 'pypi'
 c.LabServerApp.copy_absolute_path = True
 c.PluginManager.level = 'user'
 c.ServerApp.allow_origin = '*'
-c.ServerApp.base_url = "/node/${HOST_CFG}/${PORT_CFG}/"
+c.ServerApp.base_url = "/node/${host}/${port}/"
 c.ServerApp.disable_check_xsrf = True
 c.ServerApp.ip = '0.0.0.0'
 c.ServerApp.open_browser = False
