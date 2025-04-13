@@ -1,6 +1,16 @@
 <form action="/node/<%= host %>/<%= port %>/login" method="post" target="_blank">
   <input type="hidden" name="password" value="<%= password %>">
+  <input type="hidden" name="next" value="/node/<%= host %>/<%= port %>/lab">
   <button class="btn btn-primary" type="submit">
     <i class="fa fa-registered"></i> Connect to Introduction to Shell app
   </button>
 </form>
+
+<%# Commenting out for the moment 
+<form action="/node/<%= host %>/<%= port %>/login" method="post" target="_blank">
+  <input type="hidden" name="password" value="<%= password %>">
+  <button class="btn btn-primary" type="submit">
+    <i class="fa fa-registered"></i> Connect to Introduction to Shell app
+  </button>
+</form>
+%>
