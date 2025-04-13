@@ -6,22 +6,18 @@ exec &> >(tee -a "session.log")
 
 # setup host and port
 source /bin/find_host_port
-echo "From find_host_port - HOST_CFG: $HOST_CFG, PORT_CFG: $PORT_CFG"
 export host="$HOST_CFG"
 export port="$PORT_CFG"
-echo "Exported variables - host: $host, port: $port"
+
+export hostname=$(dig +short -x $HOST_CFG)
 
 # setup password
 source /bin/save_passwd_as_secret
 export password="$PASSWORD"
 source /bin/create_salt_and_sha1
 
-# Echo host and port for debugging
-echo "HOST_CFG: $HOST_CFG"
-echo "PORT_CFG: $PORT_CFG"
-
 # write config file for JupyterLab
-export CONFIG_FILE="${HOME}/ondemand_config.py"
+export CONFIG_FILE=${PWD}/ondemand_config.py
 cat << EOF > "${CONFIG_FILE}"
 c.FileContentsManager.delete_to_trash = False
 c.LabApp.check_for_updates_class = 'jupyterlab.NeverCheckForUpdate'
@@ -29,8 +25,8 @@ c.LabApp.extension_manager = 'pypi'
 c.LabServerApp.copy_absolute_path = True
 c.PluginManager.level = 'user'
 c.ServerApp.allow_origin = '*'
-c.ServerApp.base_url = "/node/${HOST_CFG}/${PORT_CFG}/"
-c.ServerApp.disable_check_xsrf = True  # This is important!
+c.ServerApp.base_url = "/node/${hostname::-1}/${PORT_CFG}/"
+c.ServerApp.disable_check_xsrf = True
 c.ServerApp.ip = '0.0.0.0'
 c.ServerApp.open_browser = False
 c.ServerApp.password = u"sha1:${SALT}:${PASSWORD_SHA1}"
