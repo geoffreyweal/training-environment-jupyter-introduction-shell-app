@@ -8,6 +8,7 @@ RUN yes | unminimize
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         bioawk \
         curl \
+        dnsutils \
         git \
         ldap-utils \
         libnss-ldapd \
