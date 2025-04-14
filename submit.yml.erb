@@ -12,7 +12,7 @@ script:
   native:
     container:
       name: "introshell"
-      image: "ghcr.io/nesi/training-environment-jupyter-introduction-shell-app:v0.5.14-dev"
+      image: "ghcr.io/nesi/training-environment-jupyter-introduction-shell-app:v0.6.0"
       command: ["/bin/bash","-l","<%= staged_root %>/job_script_content.sh"]
       working_dir: "<%= Etc.getpwnam(ENV['USER']).dir %>"
       restart_policy: 'OnFailure'
