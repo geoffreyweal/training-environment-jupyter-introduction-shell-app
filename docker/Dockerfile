@@ -6,8 +6,6 @@ RUN yes | unminimize
 # install system dependencies
 # TODO: move ldap-utils, libnss-ldapd, libpam-ldapd, nscd, nslcd to base image??
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        autoheader \
-        autoconf \
         bioawk \
         curl \
         dnsutils \
@@ -67,7 +65,7 @@ RUN wget https://github.com/lh3/bwa/archive/refs/tags/v0.7.19.tar.gz && \
 RUN wget https://github.com/samtools/bcftools/releases/download/1.23.1/bcftools-1.23.1.tar.bz2 && \
     tar -xjf bcftools-1.23.1.tar.bz2 && \
     cd bcftools-1.23.1 && \
-    autoheader && autoconf && ./configure --enable-libgsl --enable-perl-filters && \
+    #autoheader && autoconf && ./configure --enable-libgsl --enable-perl-filters && \
     make && \
     mv bcftools /usr/local/bin/ && \
     cd .. && \
