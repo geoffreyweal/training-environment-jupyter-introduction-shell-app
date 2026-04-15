@@ -52,6 +52,55 @@ RUN git clone https://github.com/nesi/training-environment-k8s-utils.git /opt/oo
 RUN echo "#!/bin/bash" > /bin/module \
     && chmod +x /bin/module
 
+# Install BWA
+RUN wget https://github.com/lh3/bwa/archive/refs/tags/v0.7.19.tar.gz && \
+    tar -xf v0.7.19.tar.gz && \
+    cd bwa-0.7.19 && \
+    make && \
+    mv bwa /usr/local/bin/ && \
+    cd .. && \
+    rm -rf bwa-0.7.19 && \
+    bwa
+
+# Install BCFtools
+RUN wget https://github.com/samtools/bcftools/releases/download/1.23.1/bcftools-1.23.1.tar.bz2 && \
+    tar -xjf bcftools-1.23.1.tar.bz2 && \
+    cd bcftools-1.23.1 && \
+    autoheader && autoconf && ./configure --enable-libgsl --enable-perl-filters && \
+    make && \
+    mv bcftools /usr/local/bin/ && \
+    cd .. && \
+    rm -rf bcftools-1.23.1 && \
+    bcftools --version
+
+# Install samtools
+RUN wget https://github.com/samtools/samtools/releases/download/1.18/samtools-1.18.tar.bz2 && \
+    tar -xjf samtools-1.18.tar.bz2 && \
+    cd samtools-1.18 && \
+    ./configure --prefix=/usr/local && \
+    make && \
+    make install && \
+    cd .. && \
+    rm -rf samtools-1.18* && \
+    samtools --version
+
+# Install hisat2
+RUN wget https://cloud.biohpc.swmed.edu/index.php/s/fE9QCsX3NH4QwBi/download -O hisat2-2.2.1-Linux_x86_64.zip && \
+    unzip hisat2-2.2.1-Linux_x86_64.zip && \
+    cd hisat2-2.2.1/ && \
+    make && \
+    cd .. && \
+    mv hisat2-2.2.1/hisat2* /usr/local/bin/ && \
+    mv hisat2-2.2.1/extract_exons* /usr/local/bin/ && \
+    rm -rf hisat2-2.2.1* && \
+    hisat2 --version
+
+# Install subread - for featureCounts
+RUN wget https://sourceforge.net/projects/subread/files/subread-2.0.3/subread-2.0.3-Linux-x86_64.tar.gz/download -O subread-2.0.3-Linux-x86_64.tar.gz && \
+    tar -xzf subread-2.0.3-Linux-x86_64.tar.gz && \
+    cp -r subread-2.0.3-Linux-x86_64/bin/* /usr/local/bin/ && \
+    rm -rf subread-2.0.3*
+
 # download the required data into the container image and make sure permission are ok
 RUN wget -nv https://github.com/GenomicsAotearoa/introduction-to-shell/releases/download/2024-July/shell_data.zip \
         -O /var/lib/shell_data.zip \
