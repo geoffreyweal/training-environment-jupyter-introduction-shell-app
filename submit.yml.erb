@@ -12,7 +12,7 @@ script:
   native:
     container:
       name: "introshell"
-      image: "ghcr.io/nesi/training-environment-jupyter-introduction-shell-app:patch-1"
+      image: "ghcr.io/geoffreyweal/training-environment-jupyter-introduction-shell-app:main"
       image_pull_policy: Always
       command: ["/bin/bash","-l","<%= staged_root %>/job_script_content.sh"]
       working_dir: "<%= Etc.getpwnam(ENV['USER']).dir %>"
