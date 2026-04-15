@@ -60,7 +60,7 @@ RUN wget https://github.com/lh3/bwa/archive/refs/tags/v0.7.19.tar.gz && \
     mv bwa /usr/local/bin/ && \
     cd .. && \
     rm -rf bwa-0.7.19 && \
-    bwa
+    #bwa
 
 # Install BCFtools
 RUN wget https://github.com/samtools/bcftools/releases/download/1.23.1/bcftools-1.23.1.tar.bz2 && \
