@@ -34,7 +34,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         libbz2-dev \
         liblzma-dev \
         libcurl4-openssl-dev \
-        libncursesw5-dev \
+        libncursesw5-dev 
 
     && rm -rf /var/lib/apt/lists/* \
     && localedef -i en_NZ -c -f UTF-8 -A /usr/share/locale/locale.alias en_NZ.UTF-8
@@ -75,7 +75,7 @@ RUN wget https://github.com/samtools/bcftools/releases/download/1.23.1/bcftools-
 RUN wget https://github.com/BenLangmead/bowtie2/archive/refs/tags/v2.5.5.zip && \
     unzip v2.5.5.zip && \
     cd bowtie2-2.5.5 && \
-    make && \
+    C=gcc-12 CXX=g++-12 make && \
     mv bowtie2 /usr/local/bin/ && \
     cd .. && \
     rm -rf bowtie2-2.5.5 && \
