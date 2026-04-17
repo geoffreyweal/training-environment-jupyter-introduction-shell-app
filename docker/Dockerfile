@@ -9,6 +9,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         bioawk \
         curl \
         dnsutils \
+        gcc-12 g++-12 \
         git \
         ldap-utils \
         libnss-ldapd \
