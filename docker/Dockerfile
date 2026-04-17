@@ -117,21 +117,28 @@ RUN wget https://sourceforge.net/projects/subread/files/subread-2.0.3/subread-2.
     rm -rf subread-2.0.3*
 
 # download the required data into the container image and make sure permission are ok
-RUN wget -nv https://github.com/GenomicsAotearoa/introduction-to-shell/releases/download/2024-July/shell_data.zip \
-        -O /var/lib/shell_data.zip \
-    && unzip /var/lib/shell_data.zip -d /var/lib \
-    && rm -f /var/lib/shell_data.zip \
-    && chown -R root:root /var/lib/shell_data \
-    && chmod -R o+rX /var/lib/shell_data 
+#RUN wget -nv https://github.com/GenomicsAotearoa/introduction-to-shell/releases/download/2024-July/shell_data.zip \
+#        -O /var/lib/shell_data.zip \
+#    && unzip /var/lib/shell_data.zip -d /var/lib \
+#    && rm -f /var/lib/shell_data.zip \
+#    && chown -R root:root /var/lib/shell_data \
+#    && chmod -R o+rX /var/lib/shell_data 
 
 # Following data is for inidigitdata intro2shell: download the required data into the container image and make sure permission are ok
-RUN wget -nv https://github.com/GenomicsAotearoa/IndigiDataAotearoa-IntroToShell/releases/download/2023-Aug/sample-data.zip \
-        -O /var/lib/sample-data.zip \
-    && unzip /var/lib/sample-data.zip -d /var/lib \
-    && rm -f /var/lib/sample-data.zip \
-    && chown -R root:root /var/lib/sample-data \
-    && chmod -R o+rX /var/lib/sample-data 
+#RUN wget -nv https://github.com/GenomicsAotearoa/IndigiDataAotearoa-IntroToShell/releases/download/2023-Aug/sample-data.zip \
+#        -O /var/lib/sample-data.zip \
+#    && unzip /var/lib/sample-data.zip -d /var/lib \
+#    && rm -f /var/lib/sample-data.zip \
+#    && chown -R root:root /var/lib/sample-data \
+#    && chmod -R o+rX /var/lib/sample-data 
 
+# Following data is for inidigitdata intro2shell: download the required data into the container image and make sure permission are ok
+RUN wget -nv https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC_Job_Scheduler/releases/download/2026-April/scripting_workshop.zip \
+        -O /var/lib/scripting_workshop.zip \
+    && unzip /var/lib/scripting_workshop.zip -d /var/lib \
+    && rm -f /var/lib/scripting_workshop.zip \
+    && chown -R root:root /var/lib/scripting_workshop \
+    && chmod -R o+rX /var/lib/scripting_workshop 
 
 # install jupyterlab
 RUN pip3 --no-cache-dir install jupyterlab
