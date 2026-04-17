@@ -76,7 +76,7 @@ RUN wget https://github.com/BenLangmead/bowtie2/archive/refs/tags/v2.5.5.zip && 
     make && \
     mv bowtie2 /usr/local/bin/ && \
     cd .. && \
-    rm -rf bowtie2-2.5.5
+    rm -rf bowtie2-2.5.5 && \
     bowtie2 --version
 
 # Install BWA
