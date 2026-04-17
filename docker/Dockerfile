@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # run unminimise
 RUN yes | unminimize
@@ -76,7 +76,7 @@ RUN wget https://github.com/BenLangmead/bowtie2/archive/refs/tags/v2.5.5.zip && 
     unzip v2.5.5.zip && \
     cd bowtie2-2.5.5 && \
     C=gcc-12 CXX=g++-12 make && \
-    mv bowtie2 /usr/local/bin/ && \
+    cp -av bowtie2* /usr/local/bin/ && 
     cd .. && \
     rm -rf bowtie2-2.5.5 && \
     bowtie2 --version
