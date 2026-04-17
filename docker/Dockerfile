@@ -7,10 +7,10 @@ RUN yes | unminimize
 # TODO: move ldap-utils, libnss-ldapd, libpam-ldapd, nscd, nslcd to base image??
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         bioawk \
-        build-essential \
         curl \
         dnsutils \
-        gcc-12 g++-12 \
+        g++-12 \
+        gcc-12 \
         git \
         ldap-utils \
         libnss-ldapd \
@@ -25,6 +25,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         python-is-python3 \
         python3 \
         python3-pip \
+        python3-venv \
         rsync \
         unzip \
         vim \
@@ -141,6 +142,11 @@ RUN wget -nv https://github.com/GenomicsAotearoa/Workshop-Bash_Scripting_And_HPC
     && rm -f /var/lib/scripting_workshop.zip \
     && chown -R root:root /var/lib/scripting_workshop \
     && chmod -R o+rX /var/lib/scripting_workshop 
+
+# Use a python virtual environment
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # install jupyterlab
 RUN pip3 --no-cache-dir install jupyterlab
