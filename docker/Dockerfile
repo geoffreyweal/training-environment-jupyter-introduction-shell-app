@@ -7,6 +7,7 @@ RUN yes | unminimize
 # TODO: move ldap-utils, libnss-ldapd, libpam-ldapd, nscd, nslcd to base image??
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         bioawk \
+        build-essential \
         curl \
         dnsutils \
         gcc-12 g++-12 \
